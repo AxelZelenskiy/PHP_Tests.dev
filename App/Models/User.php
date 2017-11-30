@@ -6,5 +6,5 @@ namespace App\Models;
 
 class User
 {
-    public static $hello = 'Hello from model user';
+    public static $hello = 'Hello from model';
 }
