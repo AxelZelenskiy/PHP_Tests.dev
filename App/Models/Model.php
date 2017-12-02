@@ -87,6 +87,10 @@ abstract class Model
 
     public function delete()
     {
+        $sql = 'DELETE FROM '.static::TABLE.' WHERE id = '.$this->id;
+        /** @var \Config\Db $db */
+        $db = Db::getInstance();
+        $db->execute($sql);
 
     }
 

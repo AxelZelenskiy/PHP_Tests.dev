@@ -32,19 +32,23 @@ echo "Test commit for github"."</br>";
 //$user2->insert();
 //echo "<h2> Trying to insert second sheet</h2>";
 //$user2->insert();
-$user_n = User::findById(1);
+$user_n = User::findById(6);
+Handlers::eco_dump($user_n);
+Handlers::eco_dump($user_n->id);
+$user_n->delete();
+
 //Handlers::eco_dump($user_n);
-echo "<h2>{$user_n->Surname}</h2>";
-$user_n->books = 'Ancient Greece books';
-echo "<h2>{$user_n->Surname}</h2>";
-echo $user_n->id;
-$user_n->save();
-$user_n1 = new User();
-$user_n1->Name = 'Rubinio';
-$user_n1->Surname = 'Rubin';
-$user_n1->email = 'Rubinio@yahoo.com';
-$user_n1->save();
-$user_n1->books = "Stones is our friends";
-$user_n1->save();
+//echo "<h2>{$user_n->Surname}</h2>";
+//$user_n->books = 'Ancient Greece books';
+//echo "<h2>{$user_n->Surname}</h2>";
+//echo $user_n->id;
+//$user_n->save();
+//$user_n1 = new User();
+//$user_n1->Name = 'Rubinio';
+//$user_n1->Surname = 'Rubin';
+//$user_n1->email = 'Rubinio@yahoo.com';
+//$user_n1->save();
+//$user_n1->books = "Stones is our friends";
+//$user_n1->save();
 
 
