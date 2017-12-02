@@ -4,8 +4,9 @@
 namespace App\Models;
 
 
-class User
+class User extends Model
 {
+    const TABLE = 'Authors';
     public $Name;
     public $Surname;
     public $email;

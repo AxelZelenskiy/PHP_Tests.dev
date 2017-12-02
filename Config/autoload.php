@@ -11,6 +11,6 @@ spl_autoload_register(function ($class_name) {
     if (file_exists($path . $req_file)) {
         require_once $path . $req_file;
     } else {
-        die('File or Class not found');
+        die('File or Class not found  '.$class_name);
     }
 });
