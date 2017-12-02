@@ -26,7 +26,8 @@ abstract class Model
     {
         /** @var \Config\Db $db */
         $db = Db::getInstance();
-        return $db->query('SELECT * FROM ' . static::TABLE . ' WHERE id =' . $id . ' LIMIT 1', static::class);
+        $result = $db->query('SELECT * FROM ' . static::TABLE . ' WHERE id =' . $id . ' LIMIT 1', static::class);
+        return reset($result);
     }
 
     protected function isNew()
@@ -56,6 +57,36 @@ abstract class Model
         $db = Db::getInstance();
         $db->execute($sql, $to_bind);
         $this->id = $db->getLastId();
+
+    }
+
+    public function update()
+    {
+        $to_bind = [];
+        $out_string = '';
+        foreach ($this as $key => $value) {
+            if ('id' == $key) {
+                $to_bind[':' . $key] = $value;
+            } else {
+                $out_string .= $key . ' = :' . $key . ', ';
+                $to_bind[':' . $key] = $value;
+            }
+        }
+        $out_string = rtrim($out_string, ', ');
+        $sql = 'UPDATE ' . static::TABLE . ' SET ' . $out_string . ' WHERE id = :id';
+        /** @var \Config\Db $db */
+        $db = Db::getInstance();
+        $db->execute($sql, $to_bind);
+    }
+
+    public function save()
+    {
+        (!$this->isNew()) ? $this->update() : $this->insert();
+
+    }
+
+    public function delete()
+    {
 
     }
 
