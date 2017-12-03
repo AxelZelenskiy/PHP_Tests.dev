@@ -27,6 +27,7 @@
         <th>Name</th>
         <th>Surname</th>
         <th>Email</th>
+        <th>Books</th>
     </tr>
     </thead>
 <tbody>
@@ -36,6 +37,14 @@ foreach ($users as $user) : ?>
     <td><?php echo $user->Name; ?></td>
     <td><?php echo $user->Surname; ?></td>
     <td><?php echo $user->email; ?></td>
+    <td><?php if (!empty($user->books)) : ?>
+        <?php foreach ($user->books as $book) :?>
+                <?php echo $book->book_name . "</br>";?>
+        <?php endforeach;?>
+            <?php else: echo "-=Nothing was written=-";?>
+        <?php endif;?>
+        </td>
+
 </tr>
 <?php endforeach;?>
 </tbody>

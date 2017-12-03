@@ -34,8 +34,30 @@ abstract class Model
     {
         /** @var \Config\Db $db */
         $db = Db::getInstance();
-        $result = $db->query('SELECT * FROM ' . static::TABLE . ' WHERE id = :id', static::class,[':id'=>$id]);
+        $result = $db->query('SELECT * FROM ' . static::TABLE . ' WHERE id = :id', static::class, [':id' => $id]);
         return reset($result);
+    }
+
+    public static function findAllByParam($param = [])
+    {
+        if (!empty($param)) {
+            $array_length = count($param);
+            $param_string = '';
+            foreach ($param as $key => $value) {
+                if (($array_length - 1) > 0) {
+                    $param_string .= $key . " =:" . $key . ' , ';
+                    $array_length--;
+                } else {
+                    $param_string .= $key . " =:" . $key;
+                }
+            }
+            /** @var \Config\Db $db */
+            $db = Db::getInstance();
+            $result = $db->query('SELECT * FROM ' . static::TABLE . ' WHERE ' . $param_string, static::class, $param);
+            return $result;
+        } else {
+            return false;
+        }
     }
 
     protected function isNew()
@@ -97,13 +119,14 @@ abstract class Model
     {
         if (!$this->isNew()) {
             echo "new row";
-            $sql = 'DELETE FROM '.static::TABLE.' WHERE id = '.$this->id;
+            $sql = 'DELETE FROM ' . static::TABLE . ' WHERE id = ' . $this->id;
             /** @var \Config\Db $db */
             $db = Db::getInstance();
             $db->execute($sql);
         } else {
             echo "exit program";
-            return;}
+            return;
+        }
 
     }
 

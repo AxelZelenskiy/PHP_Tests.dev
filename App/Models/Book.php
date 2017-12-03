@@ -7,7 +7,7 @@ namespace App\Models;
 class Book extends Model
 {
     const TABLE = 'books';
-    public $book;
+    public $book_name;
     public $author_id;
 
     public function __get($key)
