@@ -2,14 +2,15 @@
 require_once $_SERVER['DOCUMENT_ROOT']. '/Config/autoload.php';
 use Helpers\Handlers;
 use App\Models\User;
-echo "<h2> index file</h2>";
-echo \App\Controllers\User::$hello . "</br>";
-echo \App\Models\User::$hello;
-echo "Test commit for github"."</br>";
+use App\Views\Author;
+//echo "<h2> index file</h2>";
+//echo \App\Controllers\User::$hello . "</br>";
+//echo \App\Models\User::$hello;
+//echo "Test commit for github"."</br>";
 //$db = new \Config\Db();
 //$result = $db->execute('CREATE TABLE Foo (id SERIAL)');
 //var_dump($result);
-//$result_new = $db->query('SELECT * FROM Authors WHERE id>3');
+//$result_new = $db->query('SELECT * FROM Author WHERE id>3');
 //Handlers::eco_dump($result_new);
 //$setting = \App\Traits\Settings::getInstance();
 //Handlers::eco_dump($setting->data);
@@ -32,10 +33,10 @@ echo "Test commit for github"."</br>";
 //$user2->insert();
 //echo "<h2> Trying to insert second sheet</h2>";
 //$user2->insert();
-$user_n = User::findById(6);
-Handlers::eco_dump($user_n);
-Handlers::eco_dump($user_n->id);
-$user_n->delete();
+//$user_n = User::findById(6);
+//Handlers::eco_dump($user_n);
+////Handlers::eco_dump($user_n->id);
+//$user_n->delete();
 
 //Handlers::eco_dump($user_n);
 //echo "<h2>{$user_n->Surname}</h2>";
@@ -51,4 +52,9 @@ $user_n->delete();
 //$user_n1->books = "Stones is our friends";
 //$user_n1->save();
 
+//Handlers::eco_dump(__DIR__);
+$author = new Author();
+$author->users = User::findAll();
+//var_dump($author->users);
+$author->display(__DIR__ . '/App/templates/Authors/authors.php');
 

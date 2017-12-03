@@ -14,7 +14,7 @@ abstract class Model
     /**
      * @return mixed
      */
-    public static function FindAll()
+    public static function findAll()
     {
         /** @var $db \Config\Db */
         $db = Db::getInstance();
@@ -22,11 +22,19 @@ abstract class Model
             static::class);
     }
 
-    public static function findById($id)
+    public static function findOneById($id)
     {
         /** @var \Config\Db $db */
         $db = Db::getInstance();
         $result = $db->query('SELECT * FROM ' . static::TABLE . ' WHERE id =' . $id . ' LIMIT 1', static::class);
+        return reset($result);
+    }
+
+    public static function findAllById($id)
+    {
+        /** @var \Config\Db $db */
+        $db = Db::getInstance();
+        $result = $db->query('SELECT * FROM ' . static::TABLE . ' WHERE id = :id', static::class,[':id'=>$id]);
         return reset($result);
     }
 
@@ -87,10 +95,15 @@ abstract class Model
 
     public function delete()
     {
-        $sql = 'DELETE FROM '.static::TABLE.' WHERE id = '.$this->id;
-        /** @var \Config\Db $db */
-        $db = Db::getInstance();
-        $db->execute($sql);
+        if (!$this->isNew()) {
+            echo "new row";
+            $sql = 'DELETE FROM '.static::TABLE.' WHERE id = '.$this->id;
+            /** @var \Config\Db $db */
+            $db = Db::getInstance();
+            $db->execute($sql);
+        } else {
+            echo "exit program";
+            return;}
 
     }
 

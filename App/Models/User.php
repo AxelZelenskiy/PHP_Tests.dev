@@ -10,7 +10,7 @@ class User extends Model
     public $Name;
     public $Surname;
     public $email;
-    public $books;
-    public $id;
-    public static $hello = 'Hello from model';
+
+
+
 }
